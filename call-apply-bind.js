@@ -24,11 +24,9 @@ Function.prototype.myApply = function(context,args){
 Function.prototype.myBind = function(context,...args){
   if (typeof this !== 'functon'){
     return new TypeError('error');
-  }
-  context = context || window;
-  const key = Symbol();
-  context[key] = this;
-  return new function(){
-    context[key](...args)
+  };
+  const self = this;
+  return function(...innerArgs){
+    const.apply(context, args.concat[innerArgs])
   }
 }
