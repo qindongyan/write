@@ -1,0 +1,29 @@
+        subRotate(url) {
+            return new Promise(function(resolve) {
+                // 创建一个新的Image对象
+                var img = new Image();
+
+                // 当图像加载完成后执行以下操作
+                img.onload = function() {
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+
+                    // 设置Canvas的宽高，确保能容纳旋转后的图像
+                    canvas.width = img.height;
+                    canvas.height = img.width;
+
+                    // 旋转图像
+                    ctx.rotate((-90 * Math.PI) / 180); // 将角度转换为弧度
+
+                    // 绘制图像
+                    ctx.drawImage(img, -img.width, 0);
+
+                    // 将Canvas上的内容转换为base64编码
+                    var rotatedBase64 = canvas.toDataURL('image/png'); // 如果需要其他格式，请相应调整
+                    // 打印旋转后的base64编码图像
+                    console.log(rotatedBase64);
+                    resolve(rotatedBase64);
+                };
+                img.src = url;
+            });
+        },
