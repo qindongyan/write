@@ -30,3 +30,13 @@ Function.prototype.myBind = function(context,...args){
     const.apply(context, args.concat[innerArgs])
   }
 }
+
+function myNew(constructor,...args){
+    const obj = {};
+    obj.__proto__ = constructor.prototype;
+    const result = constructor.apply(obj,args);
+    if (result && (typeof result === "object" || typeof result ==='function')){
+        return result;
+    }
+    return obj;
+}
